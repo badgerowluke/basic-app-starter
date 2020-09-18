@@ -1,0 +1,126 @@
+{
+    "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters":{
+        "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]", 
+        "metadata": {
+            "description": "Location for all resources."
+            }
+        },        
+
+        "appName": { "type" : "string", "defaultValue": "TravelPortal" },
+        "insightsName": { "type": "string", "defaultValue": "medpacetravelportal" }
+
+    },
+    "variables":{
+
+
+    },
+    "resources":[
+   
+        {
+            "kind": "app",
+            "type":"Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "name": "[parameters('appName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "F1",
+                "tier": "Free",
+                "size": "F1",
+                "family": "F",
+                "capacity": 0
+            },
+            "properties": {
+                "name": "[parameters('appName')]",
+                "perSiteScaling": false,
+                "reserved": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0
+            }
+        },
+        {
+            "apiVersion": "2018-11-01",
+            "name": "[parameters('appName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverFarms', parameters('appName'))]"
+            ],
+            "identity": {
+                "type": "SystemAssigned"
+
+            },          
+            "properties": {
+                "name": "[parameters('appName')]",
+                "siteConfig": {
+                    "appSettings": [
+                      
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value":"[reference(resourceId('microsoft.insights/components/', parameters('insightsName')), '2015-05-01').InstrumentationKey]"
+                        },
+                        {
+                            "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+                            "value": "~2"
+                        },
+                        {
+                            "name": "XDT_MicrosoftApplicationInsights_Mode",
+                            "value": "default"
+                        },
+                        {
+                            "name": "DiagnosticServices_EXTENSION_VERSION",
+                            "value": "disabled"
+                        },
+                        {
+                            "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
+                            "value": "disabled"
+                        },
+                        {
+                            "name": "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
+                            "value": "disabled"
+                        },
+                        {
+                            "name": "InstrumentationEngine_EXTENSION_VERSION",
+                            "value": "disabled"
+                        },
+                        {
+                            "name": "SnapshotDebugger_EXTENSION_VERSION",
+                            "value": "disabled"
+                        },
+                        {
+                            "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
+                            "value": "disabled"
+                        }
+                    ],
+                    "metadata": [
+                        {
+                            "name": "CURRENT_STACK",
+                            "value": "dotnetcore"
+                        }
+                    ],
+                    "alwaysOn": false
+                },
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',parameters('appName'))]",
+                "hostingEnvironment": "",
+                "clientAffinityEnabled": true
+            }
+            
+        },
+        {
+          "type": "Microsoft.Web/sites/siteextensions",
+          "name": "[concat(parameters('appName'), '/AspNetCoreRuntime.3.1.x86')]",
+          "apiVersion": "2018-11-01",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('appName'))]"
+          ],
+          "properties": {
+            "version": "3.1.8"
+          }
+        }
+    ],
+    "outputs":{}
+}

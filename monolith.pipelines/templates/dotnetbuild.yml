@@ -1,0 +1,36 @@
+dotparameters:
+- name: vstsFeed
+  type: string
+  default: ''
+- name: configuration
+  type: string
+  default: 'Release'
+
+steps:
+
+- task: DotNetCoreCLI@2
+  displayName: Restore_All
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+    vstsFeed: '${{ parameters.vstsFeed }}' #make this a conditional
+
+- task: DotNetCoreCLI@2
+  displayName: Build_DOTNET
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--no-restore --configuration ${{ parameters.configuration }}'
+
+- task: ArchiveFiles@2
+  displayName: Bundle API
+  inputs:
+    rootFolderOrFile: coaches-console.api/bin/Release/netcoreapp2.1
+    includeRootFolder: false
+    archiveFile: $(Pipeline.Workspace)/coachesapi/app.zip
+    
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: $(Pipeline.Workspace)/coachesapi/app.zip
+    ArtifactName: 'coachesapi'

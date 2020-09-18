@@ -1,0 +1,9 @@
+{
+    "$schema":"https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion":"1.0.0.0",
+    "parameters": {
+        "tenantId": { "value": "aea3a7b3-756a-48fd-8d43-52a0c6e3c877" },
+        "adminId": { "value": "91761d6b-9bc3-4f65-bf99-9920a6ed6b54" },
+        "kvName": { "value": "brgsmonolith" }
+    }
+}

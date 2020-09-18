@@ -1,0 +1,20 @@
+trigger:
+  - trunk
+stages:
+- stage: build
+  jobs:
+  - job: build_all
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - template: 'monolith.pipelines/templates/dotnetbuild.yml'
+      parameters:
+        configuration: 'release'
+    
+    - template: 'monolith.pipelines/templates/test.yml'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'publish infra scripts'
+      inputs:
+        PathToPublish: 'monolith.infra'
+        ArtifactName: infra
