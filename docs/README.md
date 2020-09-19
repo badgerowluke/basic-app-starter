@@ -1,0 +1,3 @@
+# BASIC STARTER APP
+
+it's as easy as file-new-project....
