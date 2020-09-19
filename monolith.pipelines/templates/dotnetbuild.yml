@@ -5,6 +5,9 @@ dotparameters:
 - name: configuration
   type: string
   default: 'Release'
+- name: artifactName
+  type: string
+  default: ''
 
 steps:
 
@@ -33,4 +36,4 @@ steps:
   displayName: 'Publish Artifact'
   inputs:
     PathtoPublish: $(Pipeline.Workspace)/coachesapi/app.zip
-    ArtifactName: 'coachesapi'
+    ArtifactName: ${{ parameters.artifactName }}

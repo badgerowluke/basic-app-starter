@@ -10,6 +10,7 @@ stages:
     - template: 'monolith.pipelines/templates/dotnetbuild.yml'
       parameters:
         configuration: 'release'
+        artifactName: 'monolithapp'
     
     - template: 'monolith.pipelines/templates/test.yml'
 
@@ -18,3 +19,50 @@ stages:
       inputs:
         PathToPublish: 'monolith.infra'
         ArtifactName: infra
+- stage: deploy
+  jobs:
+  - deployment: 'production'
+    pool:
+      vmImage: 'windows-latest'
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            displayName: download infra
+            artifact: 'infra'
+
+          - template: 'monolith.pipelines/templates/infra.yml'
+            parameters:
+              principal: '$(principal)'
+              resourceGroup: 'monolith'
+              region: 'northcentralus'
+              templatepath: 'infra/keyvault/keyvault.json'
+              parameterspath: 'infra/keyvault/keyvaultparams.json'
+          
+          - template: 'monolith.pipelines/templates/infra.yml'
+            parameters:
+              principal: '$(principal)'
+              resourceGroup: 'monolith'
+              region: 'northcentralus'
+              templatepath: 'infra/insights/insights.json'
+              parameterspath: 'infra/insights/insightsparams.json'
+
+          - template: 'monolith.pipelines/templates/infra.yml'
+            parameters:
+              principal: '$(principal)'
+              resourceGroup: 'monolith'
+              region: 'northcentralus'
+              templatepath: 'infra/app/app.json'
+              parameterspath: 'infra/appparams.json'
+
+          - template: 'monolith.pipelines/templates/download-and-deploy.yml'
+            parameters: 
+              appType: app
+              artfact: monolithapp
+              principal: '$(principal)'
+              appName: brgs-monolith
+
+          
+          

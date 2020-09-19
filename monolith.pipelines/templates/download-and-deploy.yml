@@ -1,0 +1,29 @@
+parameters:
+- name: artifact
+  type: string
+  default: ''
+- name: principal
+  type: string
+  default: ''
+- name: appType
+  type: string
+  default: ''
+- name: appName
+  type: string
+  default: ''
+
+
+steps:
+- download: current
+  displayName: download ${{ parameters.artifact }}
+  artifact: ${{ parameters.artifact }}
+
+- task: AzureRmWebAppDeployment@3
+  displayName: 'Deploy ${{ parameters.appName }} ${{ parameters.appType }}'
+  inputs:
+    displayName: 'Deploy ${{ parameters.artifact }}'
+    azureSubscription: '${{ parameters.principal }}'
+    appType: '${{parameters.appType}}'
+    WebAppName: '${{ parameters.appName }}'
+    Package: '$(Pipeline.Workspace)/${{parameters.artifact}}/*.zip'
+    TakeAppOfflineFlag: true
