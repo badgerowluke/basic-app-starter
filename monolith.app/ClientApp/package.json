@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "echo 'hello world' && ng serve",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "build:ssr": "ng run monolith.app:server:dev",
     "test": "ng test",
     "lint": "ng lint",
