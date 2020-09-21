@@ -58,7 +58,7 @@ stages:
               resourceGroup: 'monolith'
               region: 'northcentralus'
               templatepath: 'infra/app/app.json'
-              parameterspath: 'infra/appparams.json'
+              parameterspath: 'infra/app/appparams.json'
 
           - template: 'monolith.pipelines/templates/download-and-deploy.yml'
             parameters: 
