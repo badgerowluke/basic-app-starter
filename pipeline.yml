@@ -7,6 +7,17 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: "12.x"
+      displayName: 'set node environment'
+
+    - script: |
+        npm i && npm run build
+      displayName: build client app
+      workingDirectory: monolith.app/ClientApp      
+        
     - template: 'monolith.pipelines/templates/dotnetbuild.yml'
       parameters:
         configuration: 'release'
@@ -16,6 +27,13 @@ stages:
     - template: 'monolith.pipelines/templates/dotnettest.yml'
       parameters:
         configuration: 'release'
+
+
+    - task: CopyFiles@2
+      displayName: Copy ClientLib to output assembly folder
+      inputs:
+        targetFolder: monlith.app/bin/$(BuildConfiguration)/netcoreapp3.1/ClientApp/dist
+        sourceFolder: monolith.app/ClientApp/dist        
 
     - task: PublishBuildArtifacts@1
       displayName: 'publish infra scripts'
