@@ -40,13 +40,13 @@ stages:
       inputs:
         rootFolderOrFile: monolith.app/bin/release/netcoreapp3.1
         includeRootFolder: false
-        archiveFile: 'monolithapp'
+        archiveFile: $(Pipeline.Workspace)/monolithapp/app.zip
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact'
       inputs:
-        PathtoPublish: monolith.app/bin/release/netcoreapp3.1
-        ArtifactName: 'momolithapp'     
+        PathtoPublish: $(Pipeline.Workspace)/monolithapp/app.zip
+        ArtifactName: 'monolithapp'     
 
     - task: PublishBuildArtifacts@1
       displayName: 'publish infra scripts'
