@@ -31,7 +31,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: Bundle API
   inputs:
-    rootFolderOrFile: monolith.app/bin/[Rr]elease/${{ parameters.framework }}
+    rootFolderOrFile: monolith.app/bin/Release/${{ parameters.framework }}
     includeRootFolder: false
     archiveFile: $(Pipeline.Workspace)/coachesapi/app.zip
     
