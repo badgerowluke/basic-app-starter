@@ -55,6 +55,8 @@ namespace monolith.app
             }
 
             app.UseRouting();
+            app.UseDefaultFiles();
+            
 
             app.UseEndpoints(endpoints =>
             {

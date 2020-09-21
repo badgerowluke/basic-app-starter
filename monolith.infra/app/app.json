@@ -56,6 +56,9 @@
             "properties": {
                 "name": "[parameters('appName')]",
                 "siteConfig": {
+                    "defaultDocuments": [
+                        "ClientApp/dist/index.html"
+                    ],
                     "appSettings": [
                       
                         {
