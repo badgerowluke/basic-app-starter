@@ -8,6 +8,9 @@ parameters:
 - name: artifactName
   type: string
   default: ''
+- name: framework
+  type: string
+  default: 'netcoreapp3.1'
 
 steps:
 
@@ -28,7 +31,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: Bundle API
   inputs:
-    rootFolderOrFile: coaches-console.api/bin/Release/netcoreapp2.1
+    rootFolderOrFile: coaches-console.api/bin/Release/${{ parameters.framework }}
     includeRootFolder: false
     archiveFile: $(Pipeline.Workspace)/coachesapi/app.zip
     
