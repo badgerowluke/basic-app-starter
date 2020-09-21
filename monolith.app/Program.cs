@@ -18,9 +18,19 @@ namespace monolith.app
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(build => {
+                    build.AddEnvironmentVariables();
+                    
+                })
+                .ConfigureLogging((logging) => {
+                    logging.AddDebug();
+                    logging.AddConsole();
+                })                
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
