@@ -1,4 +1,4 @@
-dotparameters:
+parameters:
 - name: vstsFeed
   type: string
   default: ''
