@@ -32,7 +32,7 @@ stages:
     - task: CopyFiles@2
       displayName: Copy ClientLib to output assembly folder
       inputs:
-        targetFolder: monolith.app/bin/$(BuildConfiguration)/netcoreapp3.1/ClientApp/dist
+        targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/dist
         sourceFolder: monolith.app/ClientApp/dist        
 
     - task: PublishBuildArtifacts@1
