@@ -91,6 +91,7 @@ stages:
               region: 'northcentralus'
               templatepath: 'infra/app/app.json'
               parameterspath: 'infra/app/appparams.json'
+              buildMode: 'Complete'
 
           - template: 'monolith.pipelines/templates/download-and-deploy.yml'
             parameters: 

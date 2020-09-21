@@ -23,6 +23,9 @@ parameters:
 - name: outputName
   type: string
   default: ''
+- name: buildMode
+  type: string
+  default: 'Incremental'
 
 steps:
     
@@ -36,4 +39,5 @@ steps:
     csmParametersFile: '$(Pipeline.Workspace)/${{ parameters.parameterspath }}'
     overrideParameters: '${{ parameters.overrides }}'
     deploymentOutputs: ${{ parameters.outputName }}
+    deploymentMode: ${{ parameters.buildMode }}
 
