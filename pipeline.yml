@@ -43,6 +43,12 @@ stages:
         archiveFile: 'monolithapp'
 
     - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact'
+      inputs:
+        PathtoPublish: monolith.app/bin/release/netcoreapp3.1
+        ArtifactName: 'momolithapp'     
+
+    - task: PublishBuildArtifacts@1
       displayName: 'publish infra scripts'
       inputs:
         PathToPublish: 'monolith.infra'
