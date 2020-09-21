@@ -30,15 +30,3 @@ steps:
     projects: '**/*.csproj'
     arguments: '--no-restore --configuration ${{ parameters.configuration }}'
 
-- task: ArchiveFiles@2
-  displayName: Bundle API
-  inputs:
-    rootFolderOrFile: monolith.app/bin/${{ parameters.configuration }}/${{ parameters.framework }}
-    includeRootFolder: false
-    archiveFile: $(Pipeline.Workspace)/coachesapi/app.zip
-    
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: $(Pipeline.Workspace)/coachesapi/app.zip
-    ArtifactName: ${{ parameters.artifactName }}
