@@ -13,7 +13,9 @@ stages:
         artifactName: 'monolithapp'
         framework: 'netcoreapp3.1'
     
-    - template: 'monolith.pipelines/templates/test.yml'
+    - template: 'monolith.pipelines/templates/dotnettest.yml'
+      parameters:
+        configuration: 'release'
 
     - task: PublishBuildArtifacts@1
       displayName: 'publish infra scripts'

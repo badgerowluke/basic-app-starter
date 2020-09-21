@@ -12,6 +12,8 @@ parameters:
   type: string
   default: 'netcoreapp3.1'
 
+
+
 steps:
 
 - task: DotNetCoreCLI@2
@@ -31,7 +33,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: Bundle API
   inputs:
-    rootFolderOrFile: monolith.app/bin/Release/${{ parameters.framework }}
+    rootFolderOrFile: monolith.app/bin/${{ parameters.configuration }}/${{ parameters.framework }}
     includeRootFolder: false
     archiveFile: $(Pipeline.Workspace)/coachesapi/app.zip
     

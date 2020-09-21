@@ -1,3 +1,7 @@
+parameters:
+- name: configuration
+  type: string
+  default: 'Release'
 steps:
 
 - task: DotNetCoreCLI@2
@@ -5,7 +9,7 @@ steps:
   inputs: 
     command: test
     projects: '**/*[Tt]est?([Ss])*/*.csproj'
-    arguments:  '--no-build --configuration $(BuildConfiguration) /p:CollectCoverage=true  /p:CoverletOutputFormat=cobertura   /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+    arguments:  '--no-build --configuration ${{ parameters.configuration }} /p:CollectCoverage=true  /p:CoverletOutputFormat=cobertura   /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
 
 
 - task: PublishCodeCoverageResults@1
