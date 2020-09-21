@@ -14,7 +14,7 @@ stages:
       displayName: 'set node environment'
 
     - script: |
-        npm i && npm run build
+        npm i && npm run build:prod
       displayName: build client app
       workingDirectory: monolith.app/ClientApp      
         
