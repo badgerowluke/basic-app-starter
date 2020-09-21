@@ -35,6 +35,12 @@ stages:
         targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/dist
         sourceFolder: monolith.app/ClientApp/dist    
         
+    - task: CopyFiles@2
+      displayName: Copy node_modules --- this better not be the issue
+      inputs:
+        targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/node_modules
+        sourceFolder: monolith.app/ClientApp/node_modules
+        
     - task: ArchiveFiles@2
       displayName: bundle
       inputs:
