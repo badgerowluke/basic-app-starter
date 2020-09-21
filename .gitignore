@@ -231,3 +231,6 @@ _Pvt_Extensions
 .fake/
 **/.DS_Store
 **/*.local.json
+
+
+.vscode
