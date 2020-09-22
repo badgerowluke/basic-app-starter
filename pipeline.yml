@@ -8,15 +8,15 @@ stages:
       vmImage: 'windows-latest'
     steps:
 
-    - task: NodeTool@0
-      inputs:
-        versionSpec: "12.x"
-      displayName: 'set node environment'
+    # - task: NodeTool@0
+    #   inputs:
+    #     versionSpec: "12.x"
+    #   displayName: 'set node environment'
 
-    - script: |
-        npm i && npm run build:prod
-      displayName: build client app
-      workingDirectory: monolith.app/ClientApp      
+    # - script: |
+    #     npm i && npm run build:prod
+    #   displayName: build client app
+    #   workingDirectory: monolith.app/ClientApp      
         
     - template: 'monolith.pipelines/templates/dotnetbuild.yml'
       parameters:
@@ -29,17 +29,17 @@ stages:
         configuration: 'release'
 
 
-    - task: CopyFiles@2
-      displayName: Copy ClientLib to output assembly folder
-      inputs:
-        targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/dist
-        sourceFolder: monolith.app/ClientApp/dist    
+    # - task: CopyFiles@2
+    #   displayName: Copy ClientLib to output assembly folder
+    #   inputs:
+    #     targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/dist
+    #     sourceFolder: monolith.app/ClientApp/dist    
 
         
     - task: ArchiveFiles@2
       displayName: bundle
       inputs:
-        rootFolderOrFile: monolith.app/bin/release/netcoreapp3.1
+        rootFolderOrFile: monolith.react/bin/release/netcoreapp3.1
         includeRootFolder: false
         archiveFile: $(Pipeline.Workspace)/monolithapp/app.zip
 
