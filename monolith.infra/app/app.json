@@ -113,6 +113,18 @@
                 "clientAffinityEnabled": true
             }
             
+        },
+        {
+          "type": "Microsoft.Web/sites/siteextensions",
+          "name": "[concat(parameters('appName'), '/AspNetCoreRuntime.3.1.x86')]",
+          "apiVersion": "2018-11-01",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('appName'))]"
+          ],
+          "properties": {
+            "version": "3.1.8"
+          }
         }
     ],
     "outputs":{}
