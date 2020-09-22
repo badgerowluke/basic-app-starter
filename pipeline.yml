@@ -75,6 +75,7 @@ stages:
               region: 'northcentralus'
               templatepath: 'infra/keyvault/keyvault.json'
               parameterspath: 'infra/keyvault/keyvaultparams.json'
+              buildMode: 'Complete'
           
           - template: 'monolith.pipelines/templates/infra.yml'
             parameters:
@@ -83,6 +84,7 @@ stages:
               region: 'northcentralus'
               templatepath: 'infra/insights/insights.json'
               parameterspath: 'infra/insights/insightsparams.json'
+              buildMode: 'Complete'              
 
           - template: 'monolith.pipelines/templates/infra.yml'
             parameters:
