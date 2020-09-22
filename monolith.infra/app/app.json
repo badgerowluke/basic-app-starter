@@ -27,11 +27,11 @@
             "name": "[parameters('appName')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "B1",
-                "tier": "Basic",
-                "size": "B1",
-                "family": "B",
-                "capacity": 1
+                "name": "F1",
+                "tier": "Free",
+                "size": "F1",
+                "family": "F",
+                "capacity": 0
             },
             "properties": {
                 "name": "[parameters('appName')]",
@@ -59,6 +59,7 @@
                     "defaultDocuments": [
                         "ClientApp/dist/index.html"
                     ],
+                    "use32BitWorkerProcess": false,
                     "appSettings": [
                       
                         {
