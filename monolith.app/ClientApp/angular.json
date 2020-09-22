@@ -16,7 +16,7 @@
             "aot": true,
             "progress": false,
             "extractCss": true,
-            "outputPath": "dist",
+            "outputPath": "../ClientApp/dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

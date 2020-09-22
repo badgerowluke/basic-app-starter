@@ -29,17 +29,17 @@ stages:
         configuration: 'release'
 
 
-    - task: CopyFiles@2
-      displayName: Copy ClientLib to output assembly folder
-      inputs:
-        targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/dist
-        sourceFolder: monolith.app/ClientApp/dist    
+    # - task: CopyFiles@2
+    #   displayName: Copy ClientLib to output assembly folder
+    #   inputs:
+    #     targetFolder: monolith.app/bin/release/netcoreapp3.1/ClientApp/dist
+    #     sourceFolder: monolith.app/ClientApp/dist    
 
         
     - task: ArchiveFiles@2
       displayName: bundle
       inputs:
-        rootFolderOrFile: monolith.app/bin/release/netcoreapp3.1
+        rootFolderOrFile: app.monolith/bin/release/netcoreapp3.1
         includeRootFolder: false
         archiveFile: $(Pipeline.Workspace)/monolithapp/app.zip
 

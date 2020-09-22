@@ -96,6 +96,10 @@
                         {
                             "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
                             "value": "disabled"
+                        },
+                        {
+                            "name": "ASPNETCORE_Environment",
+                            "value": "Production"
                         }
                     ],
                     "metadata": [
