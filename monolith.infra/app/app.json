@@ -59,7 +59,7 @@
                     "defaultDocuments": [
                         "ClientApp/dist/index.html"
                     ],
-                    "use32BitWorkerProcess": false,
+                    "use32BitWorkerProcess": true,
                     "appSettings": [
                       
                         {
