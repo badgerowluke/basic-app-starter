@@ -56,9 +56,7 @@
             "properties": {
                 "name": "[parameters('appName')]",
                 "siteConfig": {
-                    "defaultDocuments": [
-                        "ClientApp/dist/index.html"
-                    ],
+
                     "use32BitWorkerProcess": true,
                     "appSettings": [
                       
