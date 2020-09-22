@@ -95,7 +95,7 @@ stages:
 
           - template: 'monolith.pipelines/templates/download-and-deploy.yml'
             parameters: 
-              appType: app
+              appType: webApp
               artifact: monolithapp
               principal: '$(principal)'
               appName: brgs-monolith
