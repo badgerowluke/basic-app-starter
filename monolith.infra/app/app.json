@@ -27,11 +27,11 @@
             "name": "[parameters('appName')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "F1",
-                "tier": "Free",
-                "size": "F1",
-                "family": "F",
-                "capacity": 0
+                "name": "B1",
+                "tier": "Basic",
+                "size": "B1",
+                "family": "B",
+                "capacity": 1
             },
             "properties": {
                 "name": "[parameters('appName')]",
@@ -57,7 +57,7 @@
                 "name": "[parameters('appName')]",
                 "siteConfig": {
 
-                    "use32BitWorkerProcess": true,
+                    "use32BitWorkerProcess": false,
                     "appSettings": [
                       
                         {
@@ -117,7 +117,7 @@
         },
         {
           "type": "Microsoft.Web/sites/siteextensions",
-          "name": "[concat(parameters('appName'), '/AspNetCoreRuntime.3.1.x86')]",
+          "name": "[concat(parameters('appName'), '/AspNetCoreRuntime.3.1.x64')]",
           "apiVersion": "2018-11-01",
           "location": "[parameters('location')]",
           "dependsOn": [
